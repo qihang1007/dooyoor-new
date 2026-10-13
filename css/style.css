@@ -2411,6 +2411,36 @@ main { padding-bottom: calc(var(--bottomnav-h) + var(--safe-b) + 32px); }
   .entry-btn { min-height: 72px; }
 }
 
+/* ==========================================================================
+   30. 窄屏排布修正
+   问题一：375px 宽下头部一行要装 ☰ + 品牌标记 + DOOYOOR + 中文名 + 4 个操作图标，
+   总宽超出屏幕，品牌区被压扁，搜索图标压到中文名上。
+   问题二：首屏标题「一门手艺，只做一种面料」共 11 个汉字，33px 时约 363px，
+   超出可用宽约 335px，把「面料」挤成孤零零的第二行。
+   ========================================================================== */
+
+/* 窄屏：中文名让位（它同时还有生僻字缺字风险），品牌名与图标一并收窄 */
+@media (max-width: 519px) {
+  .brand-cn { display: none; }
+  .brand-name { font-size: 17px; letter-spacing: .01em; }
+  .brand-mark { width: 24px; height: 24px; }
+  .icon-btn { width: 38px; height: 38px; }
+  .header-inner { gap: 2px; }
+}
+
+/* 窄屏首屏标题：28px 时 11 个汉字约 299px，一行放得下 */
+@media (max-width: 479px) {
+  .hero-title { font-size: 28px; line-height: 1.2; }
+}
+
+/* 兜底：其它长度的标题也不出现孤字。旧浏览器不支持该属性时自动忽略，不影响原排布。 */
+.hero-title,
+.pdp-title,
+.section-head .h2 {
+  text-wrap: balance;
+}
+
+
 
 
 
